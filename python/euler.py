@@ -4,6 +4,19 @@ import functools
 import itertools
 import math
 
+def integer_right_triangles():
+  def solutions(p):
+    s = []
+    for a in range(1, p):
+      for b in range(a, p):
+        if 2*(a+b) == p + 2*a*b/p:
+          s.append({a, b})
+    s.sort()
+    return len(uniq(s))
+  ps = list(range(1, 1000))
+  ps.sort(key=solutions)
+  return ps.pop()
+
 def pandigital_multiples(m1, m2):
   def is_pandigital(s):
     l = list(s)

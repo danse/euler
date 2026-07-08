@@ -2,6 +2,10 @@ import { test } from 'node:test'
 import { strict as assert } from 'node:assert'
 const i = await import('./index.js')
 
+test('rightTriangleSolutions', (t) => {
+  assert.equal(i.rightTriangleSolutions(120), 3)
+})
+
 test('circularPrimes', (t) => {
   assert.equal(i.circularPrimes(100), 13)
 })

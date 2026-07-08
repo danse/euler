@@ -2,7 +2,50 @@
 import dayjs from "dayjs"
 import * as fs from 'node:fs/promises'
 
+export function integerRightTriangles() {
+  var ps = range(1, 1000)
+  ps.sort(on(compare, compose(negate, rightTriangleSolutions)))
+  return ps[0]
+}
 
+function compose<A, B, C>(
+  g: (a:B) => C,
+  f: (b:A) => B
+) {
+  return function(a:A) {
+    return g(f(a))
+  }
+}
+
+function negate(a:number) {
+  return -a
+}
+
+function compare(a:number, b:number) {
+  return a - b
+}
+
+function on(
+  operator: (a:number, b:number) => number,
+  preprocessor: (a: number) => number
+) {
+  return function (a: number, b: number) {
+    return operator(preprocessor(a), preprocessor(b))
+  }
+}
+
+export function rightTriangleSolutions(p:number) {
+  var s = []
+  for (var a of range(1, p)) {
+    for (var b of range(a, p)) {
+      if (2*(a+b) === p + 2*a*b/p) {
+        s.push(new Set([a, b]))
+      }
+    }
+  }
+  s.sort()
+  return uniq(s).length
+}
 
 export function pandigitalMultiples(m1:number, m2:number) {
   function isPandigital(s:string) {
