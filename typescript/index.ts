@@ -2,6 +2,31 @@
 import dayjs from "dayjs"
 import * as fs from 'node:fs/promises'
 
+export function pandigitalPrime(m:number) {
+  const c = range(1, m).map(String)
+  const r = perm(c).map(Number)
+  const p = r.filter(isPrime)
+  p.sort((a, b) => a - b)
+  return [r, p, p.pop()]
+}
+
+export function champernowneProduct() {
+  const champernowneFractional = range(1, 1000000)
+        .map(String)
+        .reduce((a, b) => a.concat(b), '')
+        .split('')
+  function d(i:number) {
+    return Number(champernowneFractional[i])
+  }
+  return d(0)*
+    d(9)*
+    d(99)*
+    d(999)*
+    d(9999)*
+    d(99999)*
+    d(999999)
+}
+
 export function integerRightTriangles() {
   var ps = range(1, 1000)
   ps.sort(on(compare, compose(negate, rightTriangleSolutions)))
@@ -70,7 +95,7 @@ export function pandigitalMultiples(m1:number, m2:number) {
   return maximum(multiples)
 }
 
-function range(n1:number, n2:number) {
+export function range(n1:number, n2:number) {
   var r = []
   for (var i=n1; i<n2; i++) {
     r.push(i)

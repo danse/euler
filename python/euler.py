@@ -4,6 +4,18 @@ import functools
 import itertools
 import math
 
+def pandigital_primes(m):
+  r = itertools.permutations(''.join(map(str, range(1, m))))
+  s = map((lambda x: int(''.join(x))), r)
+  p = list(filter(is_prime, s))
+  p.sort()
+  return p.pop()
+
+def champernowne_product():
+  fractional = ''.join(map(str, range(1, 1000000)))
+  def d(i): return int(fractional[i])
+  return d(0)*d(9)*d(99)*d(999)*d(9999)*d(99999)*d(999999)
+
 def integer_right_triangles():
   def solutions(p):
     s = []
