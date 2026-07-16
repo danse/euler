@@ -29,6 +29,20 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 import qualified Data.List.NonEmpty as NonEmpty
 
+cubicPermutations :: Int
+cubicPermutations =
+  let
+    go :: Map String [Int] -> Int -> Int
+    go m n =
+      let
+        s = sort . show $ n ^ (3 :: Integer)
+        m' = Map.insertWith (<>) s [n] m
+        g = fromMaybe [] $ Map.lookup s m'
+      in if length g == 5
+         then minimum g
+         else go m' (succ n)
+  in go mempty 1
+
 cyclicalFigurateNumbers :: [String]
 cyclicalFigurateNumbers =
   let
